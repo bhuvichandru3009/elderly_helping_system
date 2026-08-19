@@ -1,0 +1,278 @@
+/* Elderly & Disabled Helping System - Accessible Styles */
+
+:root {
+    --primary-color: #0d47a1;
+    --success-color: #2e7d32;
+    --danger-color: #c62828;
+    --warning-color: #f57f17;
+    --info-color: #0277bd;
+    --text-color: #212121;
+    --bg-color: #fafafa;
+    --font-size-base: 1.125rem;
+    --font-size-large: 1.25rem;
+    --btn-padding: 0.875rem 2rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: var(--font-size-base);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 24px;
+    z-index: 10000;
+    font-size: var(--font-size-large);
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Large readable text */
+.large-text {
+    font-size: var(--font-size-large);
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+/* Large buttons */
+.btn-large {
+    font-size: 1.25rem;
+    padding: var(--btn-padding);
+    min-height: 56px;
+    font-weight: 600;
+}
+
+.btn-large-sm {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+}
+
+/* Form controls - large and accessible */
+.form-control-lg,
+.form-select-lg {
+    font-size: var(--font-size-large);
+    padding: 0.875rem 1rem;
+    min-height: 52px;
+}
+
+.form-check-lg .form-check-input {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: 0.15rem;
+}
+
+.form-check-lg .form-check-label {
+    padding-left: 0.5rem;
+}
+
+/* Navbar */
+.navbar-brand {
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    font-size: var(--font-size-large);
+    padding: 0.75rem 1rem !important;
+}
+
+/* Hero section */
+.hero-section {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+}
+
+.hero-content h1 {
+    color: var(--primary-color);
+}
+
+/* Cards */
+.card {
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Status badges */
+.status-badge {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.status-pending {
+    background-color: var(--warning-color) !important;
+    color: #000 !important;
+}
+
+.status-accepted {
+    background-color: var(--info-color) !important;
+}
+
+.status-completed {
+    background-color: var(--success-color) !important;
+}
+
+.status-cancelled {
+    background-color: #757575 !important;
+}
+
+/* Emergency styling */
+.emergency-card {
+    border: 3px solid var(--danger-color) !important;
+    background-color: #ffebee;
+}
+
+.sos-btn {
+    animation: pulse 2s infinite;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Help type badges */
+.help-badge {
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Step circles for about page */
+.step-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Admin stat cards */
+.stat-card h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Tables - accessible */
+.table {
+    font-size: var(--font-size-base);
+}
+
+.table th {
+    font-size: var(--font-size-large);
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* High contrast focus states for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.btn:focus {
+    outline: 3px solid #ff9800;
+    outline-offset: 2px;
+}
+
+/* Alert messages */
+.alert {
+    font-size: var(--font-size-large);
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+footer p {
+    font-size: var(--font-size-base);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero-section {
+        padding: 2rem 1rem;
+    }
+
+    .btn-large {
+        font-size: 1.125rem;
+        width: 100%;
+    }
+
+    .dashboard-card {
+        min-height: auto;
+        margin-bottom: 1rem;
+    }
+
+    .stat-card h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Print friendly */
+@media print {
+    .navbar, footer, .btn, .sos-btn {
+        display: none;
+    }
+}
