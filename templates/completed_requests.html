@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Completed Requests - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Completed Requests</h1>
+
+{% if requests %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover large-text">
+        <thead class="table-success">
+            <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Requester</th>
+                <th>Location</th>
+                <th>Completed Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}
+            <tr>
+                <td>{{ req.id }}</td>
+                <td>
+                    {{ req.request_type }}
+                    {% if req.emergency %}<span class="badge bg-danger ms-1">EMERGENCY</span>{% endif %}
+                </td>
+                <td>{{ req.requester.name }}</td>
+                <td>{{ req.location }}</td>
+                <td>{{ req.completed_at.strftime('%d %b %Y, %I:%M %p') if req.completed_at else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info large-text">
+    <i class="bi bi-info-circle me-2"></i>No completed requests yet.
+</div>
+{% endif %}
+
+<div class="mt-4">
+    <a href="{{ url_for('helper_dashboard') }}" class="btn btn-outline-secondary btn-lg">
+        <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+    </a>
+</div>
+{% endblock %}

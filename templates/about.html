@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}About - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <h1 class="mb-4">About This System</h1>
+
+    <div class="card mb-4 p-4">
+        <h2>Our Mission</h2>
+        <p class="large-text">
+            The Elderly & Disabled Helping System is designed to help elderly people and those
+            with disabilities live more independently by connecting them with caring helpers
+            who can assist with daily activities.
+        </p>
+    </div>
+
+    <div class="card mb-4 p-4">
+        <h2>Who Can Use This System?</h2>
+        <ul class="large-text">
+            <li class="mb-2">Elderly people who need assistance with daily tasks</li>
+            <li class="mb-2">People with physical disabilities</li>
+            <li class="mb-2">People who cannot walk or have difficulty walking</li>
+            <li class="mb-2">People who have difficulty using their hands</li>
+            <li class="mb-2">People with visual difficulties</li>
+            <li class="mb-2">Volunteers and caregivers who want to help others</li>
+        </ul>
+    </div>
+
+    <div class="card mb-4 p-4">
+        <h2>How It Works</h2>
+        <div class="row g-4 mt-2">
+            <div class="col-md-4 text-center">
+                <div class="step-circle bg-primary text-white mx-auto mb-3">1</div>
+                <h4>Register</h4>
+                <p class="large-text">Create an account as a user or helper.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="step-circle bg-success text-white mx-auto mb-3">2</div>
+                <h4>Request or Accept</h4>
+                <p class="large-text">Users request help; helpers accept requests.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="step-circle bg-info text-white mx-auto mb-3">3</div>
+                <h4>Get Help</h4>
+                <p class="large-text">Helpers provide assistance and mark requests complete.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4 p-4">
+        <h2>Accessibility Features</h2>
+        <p class="large-text">
+            This system is built with accessibility as a top priority. We use large buttons,
+            readable fonts, high-contrast colors, and simple navigation to ensure everyone
+            can use the platform comfortably.
+        </p>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg btn-large me-3">Get Started</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg btn-large">Login</a>
+    </div>
+</div>
+{% endblock %}

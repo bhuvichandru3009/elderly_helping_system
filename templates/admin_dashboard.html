@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-3 col-sm-6">
+        <div class="card stat-card text-center p-4 bg-primary text-white">
+            <i class="bi bi-people display-4 mb-2"></i>
+            <h2>{{ total_users }}</h2>
+            <p class="large-text mb-0">Total Users</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card stat-card text-center p-4 bg-success text-white">
+            <i class="bi bi-person-check display-4 mb-2"></i>
+            <h2>{{ total_helpers }}</h2>
+            <p class="large-text mb-0">Total Helpers</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card stat-card text-center p-4 bg-warning text-dark">
+            <i class="bi bi-clock display-4 mb-2"></i>
+            <h2>{{ pending_requests }}</h2>
+            <p class="large-text mb-0">Pending Requests</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="card stat-card text-center p-4 bg-info text-white">
+            <i class="bi bi-check-circle display-4 mb-2"></i>
+            <h2>{{ completed_requests }}</h2>
+            <p class="large-text mb-0">Completed Requests</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-5">
+    <div class="col-md-6">
+        <a href="{{ url_for('manage_users') }}" class="btn btn-primary btn-lg btn-large w-100">
+            <i class="bi bi-people me-2"></i>Manage Users
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a href="{{ url_for('manage_requests') }}" class="btn btn-success btn-lg btn-large w-100">
+            <i class="bi bi-list-task me-2"></i>Manage Requests
+        </a>
+    </div>
+</div>
+
+<h2 class="mb-3">Recent Help Requests</h2>
+{% if recent_requests %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover large-text">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Helper</th>
+                <th>Date</th>
+                <th>Emergency</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in recent_requests %}
+            <tr {% if req.emergency %}class="table-danger"{% endif %}>
+                <td>{{ req.id }}</td>
+                <td>{{ req.requester.name }}</td>
+                <td>{{ req.request_type }}</td>
+                <td>
+                    <span class="badge status-badge status-{{ req.status|lower }}">{{ req.status }}</span>
+                </td>
+                <td>{{ req.helper.name if req.helper else 'None' }}</td>
+                <td>{{ req.created_at.strftime('%d %b %Y') }}</td>
+                <td>{% if req.emergency %}<span class="badge bg-danger">YES</span>{% else %}No{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info large-text">No requests found.</div>
+{% endif %}
+{% endblock %}

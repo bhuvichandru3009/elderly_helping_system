@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Helper Dashboard - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Welcome, {{ session.user_name }}!</h1>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card dashboard-card text-center p-4 h-100">
+            <i class="bi bi-inbox display-3 text-primary mb-3"></i>
+            <h3>Available Requests</h3>
+            <p class="large-text"><strong>{{ available|length }}</strong> request(s) waiting for help.</p>
+            <a href="{{ url_for('available_requests') }}" class="btn btn-primary btn-lg btn-large mt-auto">
+                View Available
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card dashboard-card text-center p-4 h-100">
+            <i class="bi bi-check-circle display-3 text-success mb-3"></i>
+            <h3>Accepted Requests</h3>
+            <p class="large-text"><strong>{{ accepted_count }}</strong> request(s) in progress.</p>
+            <a href="{{ url_for('accepted_requests') }}" class="btn btn-success btn-lg btn-large mt-auto">
+                View Accepted
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card dashboard-card text-center p-4 h-100">
+            <i class="bi bi-trophy display-3 text-info mb-3"></i>
+            <h3>Completed Requests</h3>
+            <p class="large-text"><strong>{{ completed_count }}</strong> request(s) completed.</p>
+            <a href="{{ url_for('completed_requests') }}" class="btn btn-info btn-lg btn-large mt-auto text-white">
+                View Completed
+            </a>
+        </div>
+    </div>
+</div>
+
+<h2 class="mb-3">Available Help Requests</h2>
+{% if available %}
+<div class="row g-4">
+    {% for req in available %}
+    <div class="col-md-6">
+        <div class="card h-100 {% if req.emergency %}border-danger emergency-card{% endif %}">
+            <div class="card-body p-4">
+                {% if req.emergency %}
+                <span class="badge bg-danger mb-2 large-text">EMERGENCY</span>
+                {% endif %}
+                <h4 class="card-title">{{ req.request_type }}</h4>
+                <p class="large-text"><strong>From:</strong> {{ req.requester.name }}</p>
+                <p class="large-text"><strong>Description:</strong> {{ req.description }}</p>
+                <p class="large-text"><strong>Location:</strong> {{ req.location }}</p>
+                <p class="large-text"><strong>Date:</strong> {{ req.created_at.strftime('%d %b %Y, %I:%M %p') }}</p>
+                <form method="POST" action="{{ url_for('accept_request', request_id=req.id) }}">
+                    <button type="submit" class="btn btn-success btn-lg btn-large w-100">
+                        <i class="bi bi-hand-thumbs-up me-2"></i>Accept Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info large-text">
+    <i class="bi bi-info-circle me-2"></i>No available requests at the moment. Check back later.
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow p-4">
+            <h1 class="text-center mb-4">Login</h1>
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="mb-4">
+                    <label for="email" class="form-label large-text">Email Address</label>
+                    <input type="email" class="form-control form-control-lg" id="email" name="email"
+                           required autocomplete="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label large-text">Password</label>
+                    <input type="password" class="form-control form-control-lg" id="password" name="password"
+                           required autocomplete="current-password" placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-large w-100 mb-3">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                </button>
+            </form>
+            <p class="text-center large-text mb-0">
+                Don't have an account?
+                <a href="{{ url_for('register') }}" class="fw-bold">Register here</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

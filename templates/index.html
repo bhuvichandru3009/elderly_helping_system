@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<section class="hero-section text-center py-5 mb-5">
+    <div class="hero-content">
+        <h1 class="display-4 fw-bold mb-4">Helping People Live More Independently</h1>
+        <p class="lead mb-5 mx-auto" style="max-width: 700px;">
+            An easy-to-use platform that connects elderly and disabled people with helpers
+            who can assist them with their daily needs.
+        </p>
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg btn-large">
+                <i class="bi bi-hand-index-thumb me-2"></i>Request Help
+            </a>
+            <a href="{{ url_for('register') }}" class="btn btn-success btn-lg btn-large">
+                <i class="bi bi-people-fill me-2"></i>Become a Helper
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="features-section mb-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-person-heart display-4 text-primary mb-3"></i>
+                    <h3 class="card-title">For Those Who Need Help</h3>
+                    <p class="card-text large-text">
+                        Easily request assistance with walking, food, medicine, shopping, and more.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-hand-thumbs-up display-4 text-success mb-3"></i>
+                    <h3 class="card-title">For Helpers</h3>
+                    <p class="card-text large-text">
+                        View available requests and provide assistance to those in need.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="card-body">
+                    <i class="bi bi-shield-check display-4 text-info mb-3"></i>
+                    <h3 class="card-title">Safe & Simple</h3>
+                    <p class="card-text large-text">
+                        A secure platform with easy navigation designed for everyone.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="accessibility-section bg-light rounded p-5 mb-5">
+    <h2 class="text-center mb-4"><i class="bi bi-universal-access me-2"></i>Accessibility First</h2>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <ul class="list-unstyled large-text">
+                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Large buttons and readable text</li>
+                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>High-contrast design for easy visibility</li>
+                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Simple navigation with clear labels</li>
+                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Keyboard-friendly controls</li>
+                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Mobile responsive on all devices</li>
+                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Emergency SOS button for urgent help</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="help-types-section text-center mb-5">
+    <h2 class="mb-4">Types of Help Available</h2>
+    <div class="row g-3">
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">Walking Assistance</span></div>
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">Food Assistance</span></div>
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">Medicine Assistance</span></div>
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">Hospital Assistance</span></div>
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">Shopping Assistance</span></div>
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">Household Assistance</span></div>
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">Reading Assistance</span></div>
+        <div class="col-6 col-md-3"><span class="badge bg-primary help-badge">General Assistance</span></div>
+    </div>
+</section>
+{% endblock %}

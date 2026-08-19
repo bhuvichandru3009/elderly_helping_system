@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Welcome, {{ session.user_name }}!</h1>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card dashboard-card text-center p-4 h-100">
+            <i class="bi bi-hand-index-thumb display-3 text-primary mb-3"></i>
+            <h3>Request Help</h3>
+            <p class="large-text">Need assistance? Create a new help request.</p>
+            <a href="{{ url_for('create_request') }}" class="btn btn-primary btn-lg btn-large mt-auto">
+                I Need Help
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card dashboard-card text-center p-4 h-100">
+            <i class="bi bi-list-check display-3 text-success mb-3"></i>
+            <h3>My Requests</h3>
+            <p class="large-text">You have <strong>{{ active_count }}</strong> active request(s).</p>
+            <a href="{{ url_for('my_requests') }}" class="btn btn-success btn-lg btn-large mt-auto">
+                View My Requests
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card dashboard-card text-center p-4 h-100 border-danger">
+            <i class="bi bi-exclamation-triangle-fill display-3 text-danger mb-3"></i>
+            <h3 class="text-danger">Emergency</h3>
+            <p class="large-text">Press for urgent emergency help.</p>
+            <button type="button" class="btn btn-danger btn-lg btn-large mt-auto sos-btn"
+                    data-bs-toggle="modal" data-bs-target="#sosModal">
+                SOS / EMERGENCY
+            </button>
+        </div>
+    </div>
+</div>
+
+<h2 class="mb-3">Recent Requests</h2>
+{% if requests %}
+<div class="table-responsive">
+    <table class="table table-striped table-hover large-text">
+        <thead class="table-primary">
+            <tr>
+                <th>Request Type</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Helper</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}
+            <tr {% if req.emergency %}class="table-danger"{% endif %}>
+                <td>
+                    {{ req.request_type }}
+                    {% if req.emergency %}<span class="badge bg-danger ms-1">EMERGENCY</span>{% endif %}
+                </td>
+                <td>{{ req.created_at.strftime('%d %b %Y, %I:%M %p') }}</td>
+                <td>
+                    <span class="badge status-badge status-{{ req.status|lower }}">{{ req.status }}</span>
+                </td>
+                <td>{{ req.helper.name if req.helper else 'Not assigned' }}</td>
+                <td>
+                    <a href="{{ url_for('request_details', request_id=req.id) }}"
+                       class="btn btn-sm btn-outline-primary btn-large-sm">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info large-text">
+    <i class="bi bi-info-circle me-2"></i>You have no requests yet. Click "I Need Help" to create one.
+</div>
+{% endif %}
+
+<!-- SOS Confirmation Modal -->
+<div class="modal fade" id="sosModal" tabindex="-1" aria-labelledby="sosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h2 class="modal-title" id="sosModalLabel">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>Emergency SOS
+                </h2>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body large-text">
+                <p class="fw-bold">Are you sure you need emergency help?</p>
+                <p>This will send an urgent SOS request to available helpers.</p>
+                <form method="POST" action="{{ url_for('sos_emergency') }}" id="sosForm">
+                    <div class="mb-3">
+                        <label for="sos_location" class="form-label">Your Location (optional)</label>
+                        <input type="text" class="form-control form-control-lg" id="sos_location"
+                               name="location" placeholder="Enter your location">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="sosForm" class="btn btn-danger btn-lg btn-large">
+                    Send Emergency SOS
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

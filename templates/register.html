@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card shadow p-4">
+            <h1 class="text-center mb-4">Create Account</h1>
+            <form method="POST" action="{{ url_for('register') }}" id="registerForm">
+                <div class="mb-4">
+                    <label for="name" class="form-label large-text">Full Name</label>
+                    <input type="text" class="form-control form-control-lg" id="name" name="name"
+                           required placeholder="Enter your full name">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="form-label large-text">Email Address</label>
+                    <input type="email" class="form-control form-control-lg" id="email" name="email"
+                           required placeholder="Enter your email">
+                </div>
+                <div class="mb-4">
+                    <label for="phone" class="form-label large-text">Phone Number</label>
+                    <input type="tel" class="form-control form-control-lg" id="phone" name="phone"
+                           required placeholder="Enter your phone number">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label large-text">Password</label>
+                    <input type="password" class="form-control form-control-lg" id="password" name="password"
+                           required minlength="6" placeholder="At least 6 characters">
+                </div>
+                <div class="mb-4">
+                    <label for="confirm_password" class="form-label large-text">Confirm Password</label>
+                    <input type="password" class="form-control form-control-lg" id="confirm_password"
+                           name="confirm_password" required placeholder="Confirm your password">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label large-text">Account Type</label>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="form-check form-check-lg">
+                            <input class="form-check-input" type="radio" name="account_type" id="type_user"
+                                   value="user" required checked>
+                            <label class="form-check-label large-text" for="type_user">
+                                Elderly / Disabled User
+                            </label>
+                        </div>
+                        <div class="form-check form-check-lg">
+                            <input class="form-check-input" type="radio" name="account_type" id="type_helper"
+                                   value="helper">
+                            <label class="form-check-label large-text" for="type_helper">
+                                Helper / Caregiver
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4" id="disabilitySection">
+                    <label for="disability_type" class="form-label large-text">Disability / Assistance Type</label>
+                    <select class="form-select form-select-lg" id="disability_type" name="disability_type">
+                        {% for dtype in disability_types %}
+                        <option value="{{ dtype }}">{{ dtype }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-large w-100">
+                    <i class="bi bi-person-plus me-2"></i>Register
+                </button>
+            </form>
+            <p class="text-center large-text mt-3 mb-0">
+                Already have an account?
+                <a href="{{ url_for('login') }}" class="fw-bold">Login here</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.querySelectorAll('input[name="account_type"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            var section = document.getElementById('disabilitySection');
+            section.style.display = this.value === 'user' ? 'block' : 'none';
+        });
+    });
+</script>
+{% endblock %}

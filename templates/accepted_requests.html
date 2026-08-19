@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Accepted Requests - Elderly & Disabled Helping System{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">My Accepted Requests</h1>
+
+{% if requests %}
+<div class="row g-4">
+    {% for req in requests %}
+    <div class="col-md-6">
+        <div class="card h-100 {% if req.emergency %}border-danger{% endif %}">
+            <div class="card-body p-4">
+                {% if req.emergency %}
+                <span class="badge bg-danger mb-2 large-text">EMERGENCY</span>
+                {% endif %}
+                <h4 class="card-title">{{ req.request_type }}</h4>
+                <p class="large-text"><strong>From:</strong> {{ req.requester.name }}</p>
+                <p class="large-text"><strong>Phone:</strong> {{ req.requester.phone }}</p>
+                <p class="large-text"><strong>Description:</strong> {{ req.description }}</p>
+                <p class="large-text"><strong>Location:</strong> {{ req.location }}</p>
+                <p class="large-text"><strong>Accepted:</strong> {{ req.created_at.strftime('%d %b %Y, %I:%M %p') }}</p>
+                <form method="POST" action="{{ url_for('complete_request', request_id=req.id) }}"
+                      onsubmit="return confirm('Mark this request as completed?');">
+                    <button type="submit" class="btn btn-primary btn-lg btn-large w-100">
+                        <i class="bi bi-check2-all me-2"></i>Help Completed
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info large-text">
+    <i class="bi bi-info-circle me-2"></i>You have no accepted requests at the moment.
+</div>
+{% endif %}
+
+<div class="mt-4">
+    <a href="{{ url_for('helper_dashboard') }}" class="btn btn-outline-secondary btn-lg">
+        <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+    </a>
+</div>
+{% endblock %}
